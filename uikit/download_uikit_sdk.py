@@ -195,8 +195,9 @@ work_folder = os.path.join(script_path,'tempdir')
 main_dst_folder = os.path.join(script_path,'src','main')
 
 
-if len(sys.argv) > 0:
-    run_os_cmd('curl "https://artifact-node.zego.cloud/generic/zego_uikit/public/android/zego_uikit_release.aar?version=1.0.0" -o ./zego_uikit_release.aar')
+if len(sys.argv) > 1:
+    download_cmd = 'curl "https://artifact-node.zego.cloud/generic/zego_uikit/public/android/zego_uikit_release.aar?version={}" -o ./zego_uikit_release.aar'.format()
+    run_os_cmd(sys.argv[1])
     delete(work_folder)
     delete(os.path.join(script_path,'libs','uikit.jar'))
     unzip_file(os.path.join(script_path,'zego_uikit_release.aar'),work_folder)
@@ -204,8 +205,8 @@ if len(sys.argv) > 0:
     copy_dir(os.path.join(work_folder,'res'),os.path.join(main_dst_folder,'res'))
     delete(os.path.join(main_dst_folder,'AndroidManifest.xml'))
     shutil.copy(os.path.join(work_folder,'AndroidManifest.xml'),os.path.join(main_dst_folder,'AndroidManifest.xml'))
-    if not os.path.exists(os.path.join(script_path,'libs')):
-        os.makedirs(os.path.join(script_path,'libs'))
     shutil.copy(os.path.join(work_folder,'classes.jar'),os.path.join(script_path,'libs','uikit.jar'))
     delete(work_folder)
     delete(os.path.join(script_path,'zego_uikit_release.aar'))
+
+    
