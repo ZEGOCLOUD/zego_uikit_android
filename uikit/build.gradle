@@ -55,7 +55,7 @@ android {
 
     task downloadSDK(type:Exec) {
         workingDir './'
-        commandLine "python", "download_uikit_sdk.py"
+        commandLine "python", "download_uikit_sdk.py","1.0.1"
 
     }
 
