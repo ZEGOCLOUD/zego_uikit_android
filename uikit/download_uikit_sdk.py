@@ -204,6 +204,8 @@ if len(sys.argv) > 0:
     copy_dir(os.path.join(work_folder,'res'),os.path.join(main_dst_folder,'res'))
     delete(os.path.join(main_dst_folder,'AndroidManifest.xml'))
     shutil.copy(os.path.join(work_folder,'AndroidManifest.xml'),os.path.join(main_dst_folder,'AndroidManifest.xml'))
+    if not os.path.exists(os.path.join(script_path,'libs')):
+        os.makedirs(os.path.join(script_path,'libs'))
     shutil.copy(os.path.join(work_folder,'classes.jar'),os.path.join(script_path,'libs','uikit.jar'))
     delete(work_folder)
     delete(os.path.join(script_path,'zego_uikit_release.aar'))
