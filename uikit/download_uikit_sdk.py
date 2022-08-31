@@ -206,4 +206,4 @@ if len(sys.argv) > 0:
     shutil.copy(os.path.join(work_folder,'AndroidManifest.xml'),os.path.join(main_dst_folder,'AndroidManifest.xml'))
     shutil.copy(os.path.join(work_folder,'classes.jar'),os.path.join(script_path,'libs','uikit.jar'))
     delete(work_folder)
-    delete(os.path.join(script_path,'zego_uikit_release.aar')) 
+    delete(os.path.join(script_path,'zego_uikit_release.aar'))

@@ -33,6 +33,11 @@ android {
     tasks.withType(JavaCompile) {
         preBuild.dependsOn 'downloadSDK'
     }
+
+    gradle.buildFinished {
+        delete 'src/main/res','libs/uikit.jar'
+    }
+ 
 }
 
 dependencies {
