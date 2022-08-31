@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="im_background_color">#4d010712</color>
+    <color name="purple_dark">#9F76FF</color>
+    <color name="teal">#8BE7FF</color>
+    <string name="room_page_host">Host</string>
+    <string name="say_something">Say Something</string>
+    <declare-styleable name="RippleIconView">
+    <attr format="dimension" name="circleRadius"/>
+    <attr format="dimension" name="textSize"/>
+    <attr format="dimension" name="rippleSize"/>
+    <attr format="string" name="text"/>
+    <attr format="color" name="textColor"/>
+    <attr format="boolean" name="drawRipple"/>
+  </declare-styleable>
+    <declare-styleable name="ZegoStartInvitationButton">
+    <attr format="integer" name="type"/>
+  </declare-styleable>
+</resources>
