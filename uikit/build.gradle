@@ -3,6 +3,7 @@ plugins {
     id 'maven-publish'
 }
 
+def library_version = '0.0.7'
 // Because the components are created only during the afterEvaluate phase, you must
 // configure your publications using the afterEvaluate() lifecycle method.
 afterEvaluate {
@@ -16,7 +17,7 @@ afterEvaluate {
                 // You can then customize attributes of the publication as shown below.
                 groupId = 'com.github.ZEGOCLOUD'
                 artifactId = 'zego_uikit_android'
-                version = '0.0.5'
+                version = library_version
             }
             // Creates a Maven publication called “debug”.
 //            debug(MavenPublication) {
@@ -55,7 +56,7 @@ android {
 
     task downloadSDK(type:Exec) {
         workingDir './'
-        commandLine "python", "download_uikit_sdk.py","0.0.7"
+        commandLine "python", "download_uikit_sdk.py",library_version
 
     }
 
