@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
 }
 
-def library_version = '0.0.7'
+def library_version = '0.0.8'
 // Because the components are created only during the afterEvaluate phase, you must
 // configure your publications using the afterEvaluate() lifecycle method.
 afterEvaluate {
@@ -23,10 +23,6 @@ afterEvaluate {
 //            debug(MavenPublication) {
 //                // Applies the component for the debug build variant.
 //                from components.debug
-//
-//                groupId = 'com.migrbird.dev'
-//                artifactId = 'final-debug'
-//                version = '1.0'
 //            }
         }
     }
