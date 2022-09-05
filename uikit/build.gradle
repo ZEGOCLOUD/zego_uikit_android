@@ -17,7 +17,7 @@ afterEvaluate {
                 // You can then customize attributes of the publication as shown below.
                 groupId = 'com.github.ZEGOCLOUD'
                 artifactId = 'zego_uikit_android'
-                version = library_version
+                version = '1.0.0'
             }
             // Creates a Maven publication called “debug”.
 //            debug(MavenPublication) {
