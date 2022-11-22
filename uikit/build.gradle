@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
 }
 
-def library_version = '1.6.0.5'
+def library_version = '1.6.0.6'
 // Because the components are created only during the afterEvaluate phase, you must
 // configure your publications using the afterEvaluate() lifecycle method.
 afterEvaluate {
