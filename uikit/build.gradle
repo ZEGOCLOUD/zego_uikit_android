@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
 }
 
-def library_version = '1.6.0.9'
+def library_version = '1.7.0.0'
 // Because the components are created only during the afterEvaluate phase, you must
 // configure your publications using the afterEvaluate() lifecycle method.
 afterEvaluate {
@@ -62,7 +62,7 @@ android {
     gradle.buildFinished {
         delete 'src/main/res','libs/uikit.jar'
     }
- 
+
 }
 
 dependencies {
@@ -70,5 +70,5 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.1'
 
-    implementation 'com.github.zegolibrary:express-video:3.0.1'
+    api 'com.github.zegolibrary:express-video:3.0.1'
 }

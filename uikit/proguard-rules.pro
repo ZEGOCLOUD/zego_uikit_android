@@ -20,19 +20,20 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-
+#保持 native 方法不被混淆
 -keepclasseswithmembernames class * {
     native <methods>;
 }
 
-
+#保持枚举 enum 类不被混淆
 -keepclassmembers enum * {
   *;
 }
 
+#保持 Serializable 不被混淆
 -keepnames class * implements java.io.Serializable
 
-
+#不混淆资源类
 -keepclassmembers class **.R$* {
     public static <fields>;
 }
@@ -62,6 +63,7 @@
 
 
 
+# 保持泛型参数不消失
 -keepattributes Signature
 -keepattributes Exceptions, InnerClasses
 
