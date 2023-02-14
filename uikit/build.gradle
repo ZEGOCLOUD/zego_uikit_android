@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
 }
 
-def library_version = '2.0.0.2'
+def library_version = '2.1.0.0'
 // Because the components are created only during the afterEvaluate phase, you must
 // configure your publications using the afterEvaluate() lifecycle method.
 afterEvaluate {
@@ -72,4 +72,7 @@ dependencies {
 
     api 'com.github.ZEGOCLOUD:zego_uikit_plugin_adapter_android:[2.0.0,)'
     api 'com.github.zegolibrary:express-video:3.2.0'
+
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
 }
