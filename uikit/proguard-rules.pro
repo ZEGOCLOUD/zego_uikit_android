@@ -112,6 +112,13 @@
   protected <fields>;
 }
 
+-keep class com.zegocloud.uikit.components.common.**{
+  public <methods>;
+  public <fields>;
+  protected <methods>;
+  protected <fields>;
+}
+
 -keep class com.zegocloud.uikit.plugin.**{
   public <methods>;
   public <fields>;
@@ -149,3 +156,7 @@
   **[] $VALUES;
   public *;
 }
+
+-obfuscationdictionary dic.txt
+-classobfuscationdictionary dic.txt
+-packageobfuscationdictionary dic.txt
