@@ -69,6 +69,7 @@
 
 -keep class com.zegocloud.uikit.utils.**{*;}
 -keep class com.zegocloud.uikit.service.defines.**{*;}
+-keep class com.zegocloud.uikit.service.express.**{*;}
 -keep class com.zegocloud.uikit.components.audiovideo.**{
   public <methods>;
   public <fields>;
