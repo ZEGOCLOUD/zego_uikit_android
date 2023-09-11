@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
 }
 
-def library_version = 'pre_release_2.6.0.2'
+def library_version = 'pre_release_2.6.0.3'
 // Because the components are created only during the afterEvaluate phase, you must
 // configure your publications using the afterEvaluate() lifecycle method.
 afterEvaluate {
@@ -70,7 +70,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.1'
 
-    api 'com.github.ZEGOCLOUD:zego_uikit_plugin_adapter_android:pre_release_2.1.0'
+    api 'com.github.ZEGOCLOUD:zego_uikit_plugin_adapter_android:pre_release_2.1.1'
     api 'im.zego:express-video:3.8.1'
 
     api 'com.github.bumptech.glide:glide:4.14.2'
