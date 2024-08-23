@@ -71,7 +71,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.1'
 
     api 'com.github.ZEGOCLOUD:zego_uikit_plugin_adapter_android:[2.7.0,)'
-    api 'im.zego:express-video:3.12.4'
+    api 'im.zego:express-video:3.16.2'
 
     api 'com.github.bumptech.glide:glide:4.14.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
