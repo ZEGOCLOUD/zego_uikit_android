@@ -65,7 +65,9 @@
 
 # 保持泛型参数不消失
 -keepattributes Signature
--keepattributes Exceptions, InnerClasses
+-keepattributes Exceptions
+-keepattributes InnerClasses
+-keepattributes EnclosingMethod
 
 -keep class com.zegocloud.uikit.utils.**{*;}
 -keep class com.zegocloud.uikit.service.defines.**{*;}
