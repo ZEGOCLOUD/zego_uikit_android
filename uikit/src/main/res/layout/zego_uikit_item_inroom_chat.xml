@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+
+  <com.zegocloud.uikit.components.internal.RippleIconView
+    android:id="@+id/chat_recv_icon"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="15dp"
+    android:layout_marginTop="10dp"
+    app:circleRadius="14dp"
+    app:drawRipple="false"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:textSize="12sp" />
+
+  <TextView
+    android:id="@+id/chat_recv_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="11dp"
+    android:maxLines="1"
+    android:singleLine="true"
+    android:maxWidth="160dp"
+    android:ellipsize="end"
+    android:textColor="@android:color/white"
+    android:textSize="12sp"
+    app:layout_constraintStart_toEndOf="@id/chat_recv_icon"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+    android:id="@+id/chat_recv_time"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="7dp"
+    android:textColor="#A4A4A4"
+    android:textSize="12sp"
+    app:layout_constraintBottom_toBottomOf="@id/chat_recv_name"
+    app:layout_constraintStart_toEndOf="@id/chat_recv_name"
+    app:layout_constraintTop_toTopOf="@id/chat_recv_name" />
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/chat_recv_message_layout"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="3dp"
+    android:layout_marginEnd="52dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="@id/chat_recv_name"
+    app:layout_constraintTop_toBottomOf="@id/chat_recv_name">
+
+    <TextView
+      android:id="@+id/chat_recv_message"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@drawable/zego_uikit_chat_round_rect_recv"
+      android:paddingStart="14dp"
+      android:paddingTop="9dp"
+      android:paddingEnd="14dp"
+      android:paddingBottom="9dp"
+      android:textColor="@android:color/white"
+      android:textSize="16sp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+      android:id="@+id/chat_recv_status"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="7dp"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="@id/chat_recv_message"
+      app:layout_constraintStart_toEndOf="@id/chat_recv_message"
+      app:layout_constraintTop_toTopOf="@id/chat_recv_message" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+  <androidx.constraintlayout.widget.Group
+    android:id="@+id/chat_recv_widget"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:constraint_referenced_ids="chat_recv_icon,chat_recv_name,chat_recv_time,chat_recv_message_layout" />
+
+  <com.zegocloud.uikit.components.internal.RippleIconView
+    android:id="@+id/chat_send_icon"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="15dp"
+    app:circleRadius="14dp"
+    app:drawRipple="false"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:textSize="12sp" />
+
+  <TextView
+    android:id="@+id/chat_send_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:layout_marginEnd="12dp"
+    android:maxLines="1"
+    android:singleLine="true"
+    android:textColor="@android:color/white"
+    android:textSize="12sp"
+    app:layout_constraintEnd_toStartOf="@id/chat_send_icon"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+    android:id="@+id/chat_send_time"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="7dp"
+    android:textColor="#A4A4A4"
+    android:textSize="12sp"
+    app:layout_constraintBottom_toBottomOf="@id/chat_send_name"
+    app:layout_constraintEnd_toStartOf="@id/chat_send_name"
+    app:layout_constraintTop_toTopOf="@id/chat_send_name" />
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/chat_send_message_layout"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="52dp"
+    android:layout_marginTop="3dp"
+    app:layout_constraintEnd_toEndOf="@id/chat_send_name"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/chat_send_name">
+
+
+    <TextView
+      android:id="@+id/chat_send_message"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@drawable/zego_uikit_chat_round_rect_send"
+      android:paddingStart="14dp"
+      android:paddingTop="9dp"
+      android:paddingEnd="14dp"
+      android:paddingBottom="9dp"
+      android:textColor="@android:color/white"
+      android:textSize="16sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+      android:id="@+id/chat_send_status"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="7dp"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="@id/chat_send_message"
+      app:layout_constraintEnd_toStartOf="@id/chat_send_message"
+      app:layout_constraintTop_toTopOf="@id/chat_send_message" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <androidx.constraintlayout.widget.Group
+    android:id="@+id/chat_send_widget"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:constraint_referenced_ids="chat_send_icon,chat_send_name,chat_send_message_layout,chat_send_time" />
+</androidx.constraintlayout.widget.ConstraintLayout>

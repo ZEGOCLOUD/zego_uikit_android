@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="zego_uikit_im_background_color">#4d010712</color>
+  <color name="zego_uikit_purple_dark">#9F76FF</color>
+  <color name="zego_uikit_teal">#8BE7FF</color>
+  <color name="zego_uikit_teal2">#1e2740</color>
+</resources>

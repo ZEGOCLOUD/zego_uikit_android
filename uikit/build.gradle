@@ -3,37 +3,11 @@ plugins {
     id 'maven-publish'
 }
 
-def library_version = '3.5.7'
-// Because the components are created only during the afterEvaluate phase, you must
-// configure your publications using the afterEvaluate() lifecycle method.
-afterEvaluate {
-    publishing {
-        publications {
-            // Creates a Maven publication called "release".
-            release(MavenPublication) {
-                // Applies the component for the release build variant.
-                from components.release
-
-                // You can then customize attributes of the publication as shown below.
-                groupId = 'com.github.ZEGOCLOUD'
-                artifactId = 'zego_uikit_android'
-                version = library_version
-            }
-            // Creates a Maven publication called “debug”.
-//            debug(MavenPublication) {
-//                // Applies the component for the debug build variant.
-//                from components.debug
-//            }
-        }
-    }
-}
-
 android {
-    compileSdk 32
-
+    compileSdk 34
     defaultConfig {
         minSdk 21
-        targetSdk 32
+        targetSdk 34
 
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -49,20 +23,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    task downloadSDK(type:Exec) {
-        workingDir './'
-        commandLine "python", "download_uikit_sdk.py",library_version
-
-    }
-
-    tasks.withType(JavaCompile) {
-        preBuild.dependsOn 'downloadSDK'
-    }
-
-    gradle.buildFinished {
-        delete 'src/main/res','libs/uikit.jar'
-    }
-
+    namespace 'com.zegocloud.uikit'
 }
 
 dependencies {
@@ -72,7 +33,7 @@ dependencies {
 
     api 'com.github.ZEGOCLOUD:zego_uikit_plugin_adapter_android:[3.0.0,)'
     api 'im.zego:express-video:[3.17.3,)'
-    api "im.zego:uikitreport:0.3.5"
+    api "im.zego:uikitreport:0.5.1"
 
     api 'com.github.bumptech.glide:glide:4.14.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
