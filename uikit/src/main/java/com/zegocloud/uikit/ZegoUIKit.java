@@ -62,6 +62,7 @@ import timber.log.Timber;
 public class ZegoUIKit {
 
     private static IUIKitCore uiKitCore = UIKitCore.getInstance();
+    private static String logFileDir;
 
     public static boolean init(Application application, Long appID, String appSign, ZegoScenario scenario) {
         return uiKitCore.init(application, appID, appSign, scenario);
@@ -472,15 +473,21 @@ public class ZegoUIKit {
 
     public static void debugMode(Context context) {
         if (Timber.treeCount() == 0) {
-            String logFileDir = context.getExternalFilesDir(null).getAbsolutePath() + File.separator + "uikit_log";
-            long logFileExpired = 5 * 24 * 3600 * 1000; // five days
-            long logFileMaxSize = 5 * 1024 * 1024; // 5 MB
-            Printer filePrinter = new FilePrinter.Builder(logFileDir).fileNameGenerator(new DateFileNameGenerator())
-                .cleanStrategy(new FileLastModifiedCleanStrategy(logFileExpired))
-                .backupStrategy(new FileSizeBackupStrategy2(logFileMaxSize, 3)).flattener(new ClassicFlattener())
-                .build();
-            XLog.init(filePrinter);
-            XLogInit = true;
+            File dir = context.getExternalFilesDir(null);
+            if (dir == null || (!dir.exists() && !dir.mkdirs())) {
+                dir = context.getFilesDir();
+            }
+            if (dir != null) {
+                String logFileDir = dir.getAbsolutePath() + File.separator + "uikit_log";
+                long logFileExpired = 5 * 24 * 3600 * 1000; // five days
+                long logFileMaxSize = 5 * 1024 * 1024; // 5 MB
+                Printer filePrinter = new FilePrinter.Builder(logFileDir).fileNameGenerator(new DateFileNameGenerator())
+                    .cleanStrategy(new FileLastModifiedCleanStrategy(logFileExpired))
+                    .backupStrategy(new FileSizeBackupStrategy2(logFileMaxSize, 3)).flattener(new ClassicFlattener())
+                    .build();
+                XLog.init(filePrinter);
+                XLogInit = true;
+            }
         }
         Timber.uprootAll();
         Timber.plant(new Timber.DebugTree() {
