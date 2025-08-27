@@ -13,7 +13,6 @@ import com.zegocloud.uikit.ZegoUIKit;
 import com.zegocloud.uikit.components.common.ZegoPresetResolution;
 import com.zegocloud.uikit.internal.ZegoUIKitLanguage;
 import com.zegocloud.uikit.plugin.ZegoUIKitSignalingPluginImpl;
-import com.zegocloud.uikit.plugin.adapter.ZegoPluginAdapter;
 import com.zegocloud.uikit.plugin.adapter.utils.GenericUtils;
 import com.zegocloud.uikit.plugin.beauty.BeautyPluginBridge;
 import com.zegocloud.uikit.plugin.beauty.IBeautyPlugin;
@@ -68,6 +67,7 @@ import im.zego.zegoexpress.constants.ZegoStreamResourceMode;
 import im.zego.zegoexpress.constants.ZegoUpdateType;
 import im.zego.zegoexpress.constants.ZegoVideoConfigPreset;
 import im.zego.zegoexpress.constants.ZegoVideoSourceType;
+import im.zego.zegoexpress.entity.ZegoAudioConfig;
 import im.zego.zegoexpress.entity.ZegoBarrageMessageInfo;
 import im.zego.zegoexpress.entity.ZegoBroadcastMessageInfo;
 import im.zego.zegoexpress.entity.ZegoCanvas;
@@ -765,6 +765,14 @@ public class UIKitCore implements IUIKitCore {
         ExpressEngineProxy.stopScreenCapture();
     }
 
+    public void setAudioConfig(ZegoAudioConfig config, ZegoPublishChannel channel) {
+        ExpressEngineProxy.setAudioConfig(config, ZegoPublishChannel.MAIN);
+    }
+
+    public void setPlayStreamBufferIntervalRange(int minBufferInterval, int maxBufferInterval) {
+        ExpressEngineProxy.setPlayStreamBufferIntervalRange(minBufferInterval, maxBufferInterval);
+    }
+
     @Override
     public void setVideoConfig(ZegoVideoConfig config) {
         ExpressEngineProxy.setVideoConfig(config, ZegoPublishChannel.MAIN);
@@ -777,6 +785,7 @@ public class UIKitCore implements IUIKitCore {
 
     public void unInitExpressEngine() {
         Timber.d("unInitExpressEngine() called : " + ExpressEngineProxy.getEngine());
+        setPlayStreamBufferIntervalRange(0, 4000);
         if (ExpressEngineProxy.getEngine() != null) {
             isExpressInit.set(false);
             engineProxy.removeEventHandler(initEventHandler);
@@ -1241,6 +1250,7 @@ public class UIKitCore implements IUIKitCore {
         isLargeRoom = false;
         roomMemberCount = 0;
 
+        setPlayStreamBufferIntervalRange(0, 4000);
         removeAutoDeleteRoomListeners();
     }
 

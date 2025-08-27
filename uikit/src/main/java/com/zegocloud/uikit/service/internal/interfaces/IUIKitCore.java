@@ -7,7 +7,10 @@ import com.zegocloud.uikit.plugin.beauty.IBeautyPlugin;
 import com.zegocloud.uikit.plugin.common.IZegoUIKitSignalingPlugin;
 import com.zegocloud.uikit.service.defines.ZegoScenario;
 import com.zegocloud.uikit.service.defines.ZegoUIKitTokenExpireListener;
+import com.zegocloud.uikit.service.express.ExpressEngineProxy;
 import com.zegocloud.uikit.service.express.IExpressEngineEventHandler;
+import im.zego.zegoexpress.constants.ZegoPublishChannel;
+import im.zego.zegoexpress.entity.ZegoAudioConfig;
 import im.zego.zegoexpress.entity.ZegoVideoConfig;
 
 public interface IUIKitCore extends IUserService, IRoomService, IAudioVideoService, IMessageService {
@@ -29,6 +32,10 @@ public interface IUIKitCore extends IUserService, IRoomService, IAudioVideoServi
     boolean isScreenSharing();
 
     void stopSharingScreen();
+
+    void setAudioConfig(ZegoAudioConfig config, ZegoPublishChannel channel);
+
+    void setPlayStreamBufferIntervalRange(int minBufferInterval, int maxBufferInterval);
 
     void setVideoConfig(ZegoVideoConfig config);
 

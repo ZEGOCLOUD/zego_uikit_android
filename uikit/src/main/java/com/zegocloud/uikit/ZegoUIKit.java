@@ -49,6 +49,8 @@ import im.zego.zegoexpress.callback.IZegoMixerStartCallback;
 import im.zego.zegoexpress.callback.IZegoMixerStopCallback;
 import im.zego.zegoexpress.constants.ZegoAudioRoute;
 import im.zego.zegoexpress.constants.ZegoOrientation;
+import im.zego.zegoexpress.constants.ZegoPublishChannel;
+import im.zego.zegoexpress.entity.ZegoAudioConfig;
 import im.zego.zegoexpress.entity.ZegoCanvas;
 import im.zego.zegoexpress.entity.ZegoMixerTask;
 import im.zego.zegoexpress.entity.ZegoPlayerConfig;
@@ -62,7 +64,6 @@ import timber.log.Timber;
 public class ZegoUIKit {
 
     private static IUIKitCore uiKitCore = UIKitCore.getInstance();
-    private static String logFileDir;
 
     public static boolean init(Application application, Long appID, String appSign, ZegoScenario scenario) {
         return uiKitCore.init(application, appID, appSign, scenario);
@@ -342,6 +343,14 @@ public class ZegoUIKit {
         uiKitCore.setAudioVideoResourceMode(mode);
     }
 
+    public static void setAudioConfig(ZegoAudioConfig config, ZegoPublishChannel channel) {
+        uiKitCore.setAudioConfig(config, channel);
+    }
+
+    public static void setPlayStreamBufferIntervalRange(int minBufferInterval, int maxBufferInterval) {
+        uiKitCore.setPlayStreamBufferIntervalRange(minBufferInterval, maxBufferInterval);
+    }
+    
     public static void setVideoConfig(ZegoVideoConfig config) {
         uiKitCore.setVideoConfig(config);
     }

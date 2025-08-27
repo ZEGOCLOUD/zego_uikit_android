@@ -23,6 +23,7 @@ import im.zego.zegoexpress.constants.ZegoOrientationMode;
 import im.zego.zegoexpress.constants.ZegoPublishChannel;
 import im.zego.zegoexpress.constants.ZegoScenario;
 import im.zego.zegoexpress.constants.ZegoVideoSourceType;
+import im.zego.zegoexpress.entity.ZegoAudioConfig;
 import im.zego.zegoexpress.entity.ZegoCanvas;
 import im.zego.zegoexpress.entity.ZegoCustomVideoProcessConfig;
 import im.zego.zegoexpress.entity.ZegoEngineConfig;
@@ -41,11 +42,14 @@ public class ExpressEngineProxy {
 
     private static ZegoOrientation orientation;
     private SimpleExpressEventHandler expressEventHandler;
+    private static int minBufferInterval = 0;
+    private static int maxBufferInterval = 4000;
 
     public static void startPlayingStream(String streamID, ZegoCanvas canvas) {
         if (ZegoExpressEngine.getEngine() == null) {
             return;
         }
+        setPlayStreamBufferIntervalRange(streamID, minBufferInterval, maxBufferInterval);
         ZegoExpressEngine.getEngine().startPlayingStream(streamID, canvas);
     }
 
@@ -53,6 +57,7 @@ public class ExpressEngineProxy {
         if (ZegoExpressEngine.getEngine() == null) {
             return;
         }
+        setPlayStreamBufferIntervalRange(streamID, minBufferInterval, maxBufferInterval);
         ZegoExpressEngine.getEngine().startPlayingStream(streamID, canvas, config);
     }
 
@@ -60,6 +65,7 @@ public class ExpressEngineProxy {
         if (ZegoExpressEngine.getEngine() == null) {
             return;
         }
+        setPlayStreamBufferIntervalRange(streamID, minBufferInterval, maxBufferInterval);
         ZegoExpressEngine.getEngine().startPlayingStream(streamID);
     }
 
@@ -67,6 +73,7 @@ public class ExpressEngineProxy {
         if (ZegoExpressEngine.getEngine() == null) {
             return;
         }
+        setPlayStreamBufferIntervalRange(streamID, minBufferInterval, maxBufferInterval);
         ZegoExpressEngine.getEngine().startPlayingStream(streamID, config);
     }
 
@@ -136,6 +143,19 @@ public class ExpressEngineProxy {
             return;
         }
         ZegoExpressEngine.getEngine().startPublishingStream(streamID, channel);
+    }
+
+    public static void setAudioConfig(ZegoAudioConfig config, ZegoPublishChannel channel) {
+        ZegoExpressEngine.getEngine().setAudioConfig(config, channel);
+    }
+
+    public static void setPlayStreamBufferIntervalRange(int minBufferInterval, int maxBufferInterval) {
+        ExpressEngineProxy.minBufferInterval = minBufferInterval;
+        ExpressEngineProxy.maxBufferInterval = maxBufferInterval;
+    }
+
+    public static void setPlayStreamBufferIntervalRange(String streamID, int minBufferInterval, int maxBufferInterval) {
+        ZegoExpressEngine.getEngine().setPlayStreamBufferIntervalRange(streamID, minBufferInterval, maxBufferInterval);
     }
 
     public static void setVideoConfig(ZegoVideoConfig config, ZegoPublishChannel channel) {
