@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
 import com.elvishew.xlog.XLog;
@@ -523,12 +524,20 @@ public class ZegoUIKit {
         showInLogcat = show;
     }
 
-    public static void shareLogFiles(Context context) {
+    public static File getLogFiles(Context context) {
         List<String> logPaths = getLogFilePaths(context);
+        Timber.d("getLogFiles() called with: logPaths = [" + logPaths + "]");
         File zipFile = new File(createZipFile(context, logPaths));
 
+        return zipFile;
+    }
+
+    public static void shareLogFiles(Context context) {
+        File zipFile = getLogFiles(context);
+
+        Timber.d("shareLogFiles() called with: zipFile.exists() = [" + zipFile.exists() + "]");
+
         if (zipFile.exists()) {
-            Timber.d("shareLogFiles() called with: logPaths = [" + logPaths + "]");
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("application/zip");
 
@@ -548,8 +557,6 @@ public class ZegoUIKit {
             } else {
                 context.startActivity(Intent.createChooser(intent, "Share Log Files"));
             }
-        } else {
-            Timber.d("shareLogFiles() called with: logPaths = [" + logPaths + "],BUT zipFile Not Existed");
         }
     }
 
