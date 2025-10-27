@@ -2,7 +2,11 @@ package com.zegocloud.uikit;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 import com.elvishew.xlog.XLog;
 import com.elvishew.xlog.flattener.ClassicFlattener;
 import com.elvishew.xlog.printer.Printer;
@@ -43,7 +47,10 @@ import com.zegocloud.uikit.service.defines.ZegoUserUpdateListener;
 import com.zegocloud.uikit.service.express.ExpressEngineProxy;
 import com.zegocloud.uikit.service.express.IExpressEngineEventHandler;
 import com.zegocloud.uikit.service.internal.UIKitCore;
+import com.zegocloud.uikit.service.internal.UIKitTranslationText;
 import com.zegocloud.uikit.service.internal.interfaces.IUIKitCore;
+import com.zegocloud.uikit.utils.FileUtils;
+import com.zegocloud.uikit.utils.ZipUtils;
 import im.zego.zegoexpress.callback.IZegoIMSendBarrageMessageCallback;
 import im.zego.zegoexpress.callback.IZegoMixerStartCallback;
 import im.zego.zegoexpress.callback.IZegoMixerStopCallback;
@@ -350,7 +357,7 @@ public class ZegoUIKit {
     public static void setPlayStreamBufferIntervalRange(int minBufferInterval, int maxBufferInterval) {
         uiKitCore.setPlayStreamBufferIntervalRange(minBufferInterval, maxBufferInterval);
     }
-    
+
     public static void setVideoConfig(ZegoVideoConfig config) {
         uiKitCore.setVideoConfig(config);
     }
@@ -514,5 +521,79 @@ public class ZegoUIKit {
 
     public static void showInLogcat(boolean show) {
         showInLogcat = show;
+    }
+
+    public static void shareLogFiles(Context context) {
+        List<String> logPaths = getLogFilePaths(context);
+        File zipFile = new File(createZipFile(context, logPaths));
+
+        if (zipFile.exists()) {
+            Timber.d("shareLogFiles() called with: logPaths = [" + logPaths + "]");
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("application/zip");
+
+            Uri contentUri;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                String authority = context.getPackageName() + ".UIKit.fileProvider";
+                contentUri = FileProvider.getUriForFile(context, authority, zipFile);
+                context.grantUriPermission(context.getPackageName(), contentUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            } else {
+                contentUri = Uri.fromFile(zipFile);
+            }
+            intent.putExtra(Intent.EXTRA_STREAM, contentUri);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            UIKitTranslationText translationText = UIKitCore.getInstance().getTranslationText();
+            if (translationText != null) {
+                context.startActivity(Intent.createChooser(intent, translationText.UIKit_SHARE_LOG));
+            } else {
+                context.startActivity(Intent.createChooser(intent, "Share Log Files"));
+            }
+        } else {
+            Timber.d("shareLogFiles() called with: logPaths = [" + logPaths + "],BUT zipFile Not Existed");
+        }
+    }
+
+    private static @NonNull List<String> getLogFilePaths(Context context) {
+        String logFileDir = null;
+        File dir = context.getExternalFilesDir(null);
+        if (dir == null || (!dir.exists() && !dir.mkdirs())) {
+            dir = context.getFilesDir();
+        }
+        if (dir != null) {
+            logFileDir = dir.getAbsolutePath() + File.separator + "uikit_log";
+        }
+        List<String> logPaths = new ArrayList<>();
+        if (logFileDir != null) {
+            logPaths.add(logFileDir);
+        }
+        logPaths.add(getZIMLogsDir(context));
+        List<String> expressEngineLogs = getExpressEngineLogs(context);
+        if (!expressEngineLogs.isEmpty()) {
+            logPaths.addAll(expressEngineLogs);
+        }
+
+        return logPaths;
+    }
+
+    private static List<String> getExpressEngineLogs(Context context) {
+        File externalFilesDir = context.getExternalFilesDir(null);
+        return FileUtils.findFilesWithPrefix(externalFilesDir.getAbsolutePath(), "zegoavlog");
+    }
+
+    private static String getZIMLogsDir(Context context) {
+        File externalFilesDir = context.getExternalFilesDir(null);
+        return externalFilesDir + File.separator + "ZIMLogs";
+    }
+
+
+    private static String createZipFile(Context context, List<String> files) {
+        String outputZipFilePath = context.getExternalFilesDir(null) + File.separator + "zegolog.zip";
+
+        File zipFile = new File(outputZipFilePath);
+        if (zipFile.exists()) {
+            zipFile.delete();
+        }
+        ZipUtils.createZipFile(files, outputZipFilePath);
+        return outputZipFilePath;
     }
 }

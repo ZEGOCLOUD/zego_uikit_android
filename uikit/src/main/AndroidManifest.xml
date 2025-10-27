@@ -21,4 +21,15 @@
   <uses-feature android:name="android.hardware.camera" />
   <uses-feature android:name="android.hardware.camera.autofocus" />
 
+  <application>
+    <provider
+      android:name=".internal.ZegoUIKitFileProvider"
+      android:authorities="${applicationId}.UIKit.fileProvider"
+      android:exported="false"
+      android:grantUriPermissions="true">
+      <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/provider_paths" />
+    </provider>
+  </application>
 </manifest>

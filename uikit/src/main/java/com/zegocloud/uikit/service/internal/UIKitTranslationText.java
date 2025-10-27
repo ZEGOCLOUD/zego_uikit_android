@@ -12,6 +12,7 @@ public class UIKitTranslationText {
     public String UIKit_USER_LEFT_ROOM;
     public String UIKit_SHAREING_SCREEN_TIPS;
     public String UIKit_STOP_SHARE;
+    public String UIKit_SHARE_LOG;
 
     public UIKitTranslationText() {
         this(ZegoUIKitLanguage.ENGLISH);
@@ -27,6 +28,7 @@ public class UIKitTranslationText {
             UIKit_USER_LEFT_ROOM = "%s 离开了会议";
             UIKit_SHAREING_SCREEN_TIPS = "正在进行屏幕共享";
             UIKit_STOP_SHARE = "停止共享";
+            UIKit_SHARE_LOG = "分享日志文件";
         } else {
             UIKit_InRoomMessage_Host = "Host";
             UIKit_MessageInput_Hint = "Say Something";
@@ -36,6 +38,7 @@ public class UIKitTranslationText {
             UIKit_USER_LEFT_ROOM = "%s left the conference";
             UIKit_SHAREING_SCREEN_TIPS = "Your are sharing screen";
             UIKit_STOP_SHARE = "Stop Sharing";
+            UIKit_SHARE_LOG = "Share Log Files";
         }
     }
 }
